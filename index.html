@@ -7,15 +7,15 @@
   <body>
     <button type="button" id="requestAPIKey">Request API</button>
     <p>Your API key: <span id="result">No key yet..</span></p>
-    <form class="addData" method="post">
-      <input type="text" name="author" placeholder="Author"></input>
-      <input type="text" name="title" placeholder="Title"></input>
-      <input type="button" id="addBookBtn" value="Add Book"></input>
+    
+    <form id="addBookForm" method="GET">
+      <input type="text" id="author" name="author" placeholder="Author"></input>
+      <input type="text" id="title" name="title" placeholder="Title"></input>
+      <input type="submit" id="addBookBtn" value="Add Book"></input>
     </form>
-
-
     <footer>
-      <script src="script.js" charset="utf-8"></script
+      <script src="script.js" charset="utf-8"></script>
     </footer>
   </body>
 </html>
+
