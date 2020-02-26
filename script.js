@@ -11,26 +11,30 @@ function fetchAPI(){
   };
 
 function addBook(){
-  //Något som inte funkar xddddd, men på rätt väg i guess
+  var counter = 1;  //counter för att se till att vi max checkar 10 gånger
   var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';  //hittade urlen i dokumentationen, tror den är fel
   var fetchRequest = url + myKey + '&op=insert&title=' + document.getElementById("title").value + "&author=" + document.getElementById("author").value; //lägger till urlen, och alla värdena i en sträng
   var main = document.getElementById("test"); //tar ett element ur htmlen
   main.innerHTML =  "Adding book..."; //skriver bara 'adding book'
-  fetchFromApi(fetchRequest, main); //kallar på en metod för att kunna kör den rekursivt, passerar in requesten och html referensen för att kunna använda samma metod för flera saker
+  fetchFromApi(fetchRequest, main, counter); //kallar på en metod för att kunna kör den rekursivt, passerar in requesten och html referensen för att kunna använda samma metod för flera saker
 }
 
-function fetchFromApi(fetchRequest, htmlElement){
+function fetchFromApi(fetchRequest, htmlElement, counter){
   fetch(fetchRequest) //fetchar requesten
   .then((response) => 
-    response.json() //gör om till json
-  ).then((jsonResponse) => 
-  {
+    response.json()) //gör om till json
+  .then((jsonResponse) => {
     console.log(jsonResponse.status);  //loggar statusen i debug syfte
-    if(jsonResponse.status == "error"){  //om statusen är 'error'
-      fetchFromApi(fetchRequest, htmlElement);  //kör samma metod igen
+    if(jsonResponse.status == "error"){  //om statusen är 'error' 
+      if(counter >= 10){ 
+        htmlElement.innerHTML = "Couldn't add book."; //self explanatory
+      } else {
+        fetchFromApi(fetchRequest, htmlElement, counter + 1);  //kör samma metod igen
+      }
     } else {
     htmlElement.innerHTML = jsonResponse.id; //skriv ut id på 'transaktionen'
-  }});
+    }
+  });
 }
 
 document.getElementById("requestAPIKey").onclick = function(){
