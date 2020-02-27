@@ -7,21 +7,21 @@
   </head>
   <body>
     <div class="w-25 p-5" >
-      <h4>Your API key</h4><p class="" id="keyResult">No Key</p>
+      <h4>Your API key</h4><p id="keyResult">No Key</p>
       <button type="button" class="btn btn-primary" id="requestAPIKey">Request new API Key</button>
     </div>
     <form class="w-50 p-5">
       <fieldset>
-        <div class="form-group">
+        <div class="form-group" id="authorInputBox">
           <label class="col-form-label" for="authorInput">Author</label>
           <input type="text" class="form-control" placeholder="Author" id="authorInput">
         </div>
-        <div class="form-group">
+        <div class="form-group" id="titleInputBox">
           <label class="col-form-label" for="titleInput">Title</label>
           <input type="text" class="form-control" placeholder="Title" id="titleInput">
         </div>
       </fieldset>
-      <button type="button" class="btn btn-primary" id="addBookBtn">Add Book</button>
+      <button type="button" class="btn btn-primary" id="addBookBtn" disabled = "true">Add Book</button>
       <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="operationAlert">
         <strong id="operationStatus" class="font-weight-bold text-uppercase"></strong> <span id="operationMessage"></span>
       </div>
