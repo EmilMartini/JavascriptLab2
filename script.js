@@ -52,22 +52,42 @@ function showBook(){
   var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
   var fetchRequest = url + myKey + "&op=select";
 
-  /*TODO: 
-  
-  Deklarera elementet som skall visa innehållet
+  var showStatusElement = document.getElementById("showOperationStatus"); //tar ett element ur htmlen
+  var showMessageElement = document.getElementById("showOperationMessage")
+  var showAlertElement = document.getElementById("showOperationAlert");
 
-  vid fail, skriv ut fail, var då någonstans?
+  var tableElement = document.getElementById("bookViewTable");
 
-  Vid success, skapa så många tabellrader som krävs för att rymma böckerna
-  Fyll med innehåll
-  
-  */
+  showMessageElement.innerHTML =  "Getting book..."; //skriver bara 'adding book'
+  showStatusElement.innerHTML = "Pending: ";
+  showAlertElement.classList.remove("alert-danger", "alert-success");
+  showAlertElement.classList.add("alert-secondary");
 
+  function showSuccessCallback(jsonResponse){
+    showStatusElement.innerHTML = jsonResponse.status + ": "; 
+    showMessageElement.innerHTML = "got books!";
+    showAlertElement.classList.remove("alert-secondary");
+    showAlertElement.classList.add("alert-success");
+    
+    var dynamicHtml = "";
 
+    for (let i = 0; i < jsonResponse.data.length; i++) {
 
-  fetch(fetchRequest)
-  .then((response) => response.json())
-  .then((jsonResponse) => console.log(jsonResponse));
+      dynamicHtml += ('<tr class="table-info"><td>'+ jsonResponse.data[i].id +'</td><td>'+ jsonResponse.data[i].author +'</td><td>' + jsonResponse.data[i].title + '</td></td>');
+ 
+    }
+
+    tableElement.innerHTML = dynamicHtml;
+
+  }
+  function showFailedCallback(jsonResponse){
+    showStatusElement.innerHTML = jsonResponse.status + ": "; 
+    showMessageElement.innerHTML = jsonResponse.message;
+    showAlertElement.classList.remove("alert-secondary");
+    showAlertElement.classList.add("alert-danger");
+  }
+  fetchFromApi(fetchRequest, counter, showSuccessCallback, showFailedCallback);
+
 }
 
 function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
@@ -75,7 +95,7 @@ function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
   .then((response) => 
     response.json()) //gör om till json
   .then((jsonResponse) => {
-    console.log(jsonResponse.status);  //loggar statusen i debug syfte
+    console.log(jsonResponse);  //loggar statusen i debug syfte
     if(jsonResponse.status == "error"){  //om statusen är 'error' 
       if(counter >= 10){ 
 

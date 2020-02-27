@@ -28,6 +28,9 @@
     </form>
     <div>
       <button type="button" class="btn btn-primary" id="viewBooksBtn">Show Saved Books</button>
+      <div class="alert alert-dismissible alert-secondary mt-3 p-0 w-50" id="showOperationAlert">
+        <strong id="showOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="showOperationMessage"></span>
+      </div>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -37,6 +40,7 @@
           </tr>
         </thead>
         <tbody id="bookViewTable">
+          
 
         </tbody>
       </table>
