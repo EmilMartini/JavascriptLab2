@@ -12,19 +12,22 @@ function fetchAPI(){
   fetch(APIUrl)
     .then((response) =>
       response.json())
-    .then((jsonResponse) => {keyResultElement.innerHTML = jsonResponse.key; myKey = jsonResponse.key})
+    .then((jsonResponse) => {keyResultElement.innerHTML = jsonResponse.key; myKey = jsonResponse.key});
   };
 
 function addBook(){
-  var counter = 1;  //counter för att se till att vi max checkar 10 gånger
-  var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';  //hittade urlen i dokumentationen, tror den är fel
-  var fetchRequest = url + myKey + '&op=insert&title=' + document.getElementById("titleInput").value + "&author=" + document.getElementById("authorInput").value; //lägger till urlen, och alla värdena i en sträng
-  var addStatusElement = document.getElementById("addOperationStatus"); //tar ett element ur htmlen
+  var counter = 1;
+  var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
+  var titleInput = document.getElementById("titleInput");
+  var authorInput = document.getElementById("authorInput");
+  var operation = '&op=insert';
+  var fetchRequest = url + myKey + operation + "&title=" + titleInput.value + "&author=" + authorInput.value;
+
+  var addStatusElement = document.getElementById("addOperationStatus");
   var addMessageElement = document.getElementById("addOperationMessage")
   var addAlertElement = document.getElementById("addOperationAlert");
 
-  //manipulera elementen
-  addMessageElement.innerHTML =  "Adding book..."; //skriver bara 'adding book'
+  addMessageElement.innerHTML =  "Adding book...";
   addStatusElement.innerHTML = "Pending: ";
   addAlertElement.classList.remove("alert-danger", "alert-success");
   addAlertElement.classList.add("alert-secondary");
@@ -58,26 +61,32 @@ function showBook(){
 
   var tableElement = document.getElementById("bookViewTable");
 
-  showMessageElement.innerHTML =  "Getting book..."; //skriver bara 'adding book'
+  showMessageElement.innerHTML =  "Getting book...";
   showStatusElement.innerHTML = "Pending: ";
   showAlertElement.classList.remove("alert-danger", "alert-success");
   showAlertElement.classList.add("alert-secondary");
 
   function showSuccessCallback(jsonResponse){
     showStatusElement.innerHTML = jsonResponse.status + ": "; 
-    showMessageElement.innerHTML = "got books!";
+
+    if(jsonResponse.data.length > 0){
+      showMessageElement.innerHTML = "Got all " + jsonResponse.data.length + " books!";
+    } else {
+      showMessageElement.innerHTML = "No errors but no books in database.";
+    }
+
     showAlertElement.classList.remove("alert-secondary");
     showAlertElement.classList.add("alert-success");
     
     var dynamicHtml = "";
 
     for (let i = 0; i < jsonResponse.data.length; i++) {
-
-      dynamicHtml += ('<tr class="table-info"><td>'+ jsonResponse.data[i].id +'</td><td>'+ jsonResponse.data[i].author +'</td><td>' + jsonResponse.data[i].title + '</td></td>');
- 
+      dynamicHtml += ('<tr class="table-info"><td id="dataId">'+ jsonResponse.data[i].id +'</td><td id="dataAuthor">'+ jsonResponse.data[i].author +'</td><td id="dataTitle">' + jsonResponse.data[i].title + '</td></td>');
     }
 
     tableElement.innerHTML = dynamicHtml;
+
+    addOnClickListenerToRows(document.getElementsByTagName("tr"));
 
   }
   function showFailedCallback(jsonResponse){
@@ -134,6 +143,24 @@ function validateButton(button, firstInput, secondInput){
   }
 }
 
+function displaySelectedObject(object){
+  document.getElementById("editAuthorInput").value = object.Author;
+  document.getElementById("editTitleInput").value = object.Title;
+}
+
+function addOnClickListenerToRows(rows){
+  for (var i = 0; i < rows.length; i++)
+  {
+      rows[i].onclick = function() {
+        var object = {
+          Id : document.getElementById("showBookTable").rows[this.rowIndex].cells[0].innerHTML,
+          Author : document.getElementById("showBookTable").rows[this.rowIndex].cells[1].innerHTML,
+          Title : document.getElementById("showBookTable").rows[this.rowIndex].cells[2].innerHTML
+        }
+        displaySelectedObject(object);
+      };
+  }
+}
 
 document.getElementById("requestAPIKey").onclick = function(){
   fetchAPI();
@@ -146,12 +173,6 @@ document.getElementById("addBookBtn").onclick = function(){
 document.getElementById("viewBooksBtn").onclick = function(){
   showBook();
 };
-
-
-
-// document.getElementById("showBookBtn").onclick = function(){
-  // showBook();
-// }
 
 document.getElementById("authorInput").onkeyup = function(){
   authorValid = validate(document.getElementById("authorInput"));

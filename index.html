@@ -3,14 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="bootstrap.css"> <!--dokumentation https://bootswatch.com/lux/-->
+    <link rel="stylesheet" href="bootstrap.css"> <!--dokumentation https://bootswatch.com/lux/ -->
   </head>
   <body>
     <div class="w-25 p-5" >
       <h4>Your API key</h4><p id="keyResult">No Key</p>
       <button type="button" class="btn btn-primary" id="requestAPIKey">Request new API Key</button>
-    </div>
-    <form class="w-50 p-5">
+    </div><hr>
+
+    <form class="w-25 p-4 mt-3 float-left text-center">
+      <h4>Add Book</h4>
       <fieldset>
         <div class="form-group" id="authorInputBox">
           <label class="col-form-label" for="authorInput">Author</label>
@@ -22,16 +24,16 @@
         </div>
       </fieldset>
       <button type="button" class="btn btn-primary" id="addBookBtn" disabled = "true">Add Book</button>
-      <div class="alert alert-dismissible alert-secondary mt-3 p-0 w-50" id="addOperationAlert">
+      <div class="alert alert-dismissible alert-secondary mt-3 p-0 w-100" id="addOperationAlert">
         <strong id="addOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="addOperationMessage"></span>
-      </div>
     </form>
-    <div>
+    </div>
+    <div class="p-4 mt-3 float-left w-50 text-center">
       <button type="button" class="btn btn-primary" id="viewBooksBtn">Show Saved Books</button>
-      <div class="alert alert-dismissible alert-secondary mt-3 p-0 w-50" id="showOperationAlert">
+      <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="showOperationAlert">
         <strong id="showOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="showOperationMessage"></span>
       </div>
-      <table class="table table-hover">
+      <table class="table table-hover p-4" id="showBookTable">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -39,12 +41,30 @@
             <th scope="col">Title</th>
           </tr>
         </thead>
-        <tbody id="bookViewTable">
-          
-
+        <tbody id="bookViewTable">         
         </tbody>
       </table>
     </div>
+      <div id="editBookContainer" class="w-25 p-4 mt-3 float-left text-center">
+      <form>
+        <h4>Edit Book</h4>
+        <fieldset>
+          <div class="form-group" id="editAuthorInputBox">
+            <label class="col-form-label" for="editAuthorInput">Author</label>
+            <input type="text" class="form-control" id="editAuthorInput">
+          </div>
+          <div class="form-group" id="editTitleInputBox">
+            <label class="col-form-label" for="editTitleInput">Title</label>
+            <input type="text" class="form-control" id="editTitleInput">
+          </div>
+        </fieldset>
+        <button type="button" class="btn btn-primary" id="editBooksBtn">Edit Book</button>
+        <button type="button" class="btn btn-primary" id="deleteBooksBtn">Delete Book</button>
+        </form>
+        <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="showOperationAlert">
+          <strong id="editOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="editOperationMessage"></span>
+        </div>
+      </div>
     <footer>
       <script src="script.js" charset="utf-8"></script>
     </footer>
