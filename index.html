@@ -6,24 +6,26 @@
     <link rel="stylesheet" href="bootstrap.css"> <!--dokumentation https://bootswatch.com/lux/-->
   </head>
   <body>
-    <div>
-      <input type="button" id="requestAPIKey" value="Request new API Key"></input>
-      <p>Your API key: <span id="result">No Key</span></p><hr>
-      
-      <form id="addBookForm" method="GET">
-        <input type="text" id="author" name="author" placeholder="Author"></input><br>
-        <input type="text" id="title" name="title" placeholder="Title"></input><br>
-        <input type="button" id="addBookBtn" value="Add Book"></input>
-      </form>
-      <p id="test">Action status: </p><hr>
+    <div class="w-25 p-5" >
+      <h4>Your API key</h4><p class="" id="keyResult">No Key</p>
+      <button type="button" class="btn btn-primary" id="requestAPIKey">Request new API Key</button>
     </div>
-    <input type="button" id="showBookBtn" value="Log Books"></input>
-
-    <div class="alert alert-dismissible alert-warning">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <h4 class="alert-heading">Warning!</h4>
-      <p class="mb-0" id="operationResult"></p>
-    </div>
+    <form class="w-50 p-5">
+      <fieldset>
+        <div class="form-group">
+          <label class="col-form-label" for="authorInput">Author</label>
+          <input type="text" class="form-control" placeholder="Author" id="authorInput">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="titleInput">Title</label>
+          <input type="text" class="form-control" placeholder="Title" id="titleInput">
+        </div>
+      </fieldset>
+      <button type="button" class="btn btn-primary" id="addBookBtn">Add Book</button>
+      <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="operationAlert">
+        <strong id="operationStatus" class="font-weight-bold text-uppercase"></strong> <span id="operationMessage"></span>
+      </div>
+    </form>
     <footer>
       <script src="script.js" charset="utf-8"></script>
     </footer>
