@@ -19,42 +19,35 @@ function addBook(){
   var counter = 1;  //counter för att se till att vi max checkar 10 gånger
   var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';  //hittade urlen i dokumentationen, tror den är fel
   var fetchRequest = url + myKey + '&op=insert&title=' + document.getElementById("titleInput").value + "&author=" + document.getElementById("authorInput").value; //lägger till urlen, och alla värdena i en sträng
-  var operationStatusElement = document.getElementById("addOperationStatus"); //tar ett element ur htmlen
-  var operationMessageElement = document.getElementById("addOperationMessage")
-  var operationAlertElement = document.getElementById("addOperationAlert");
+  var addStatusElement = document.getElementById("addOperationStatus"); //tar ett element ur htmlen
+  var addMessageElement = document.getElementById("addOperationMessage")
+  var addAlertElement = document.getElementById("addOperationAlert");
 
   //manipulera elementen
-  operationMessageElement.innerHTML =  "Adding book..."; //skriver bara 'adding book'
-  operationStatusElement.innerHTML = "Pending: ";
-  operationAlertElement.classList.remove("alert-danger", "alert-success");
-  operationAlertElement.classList.add("alert-secondary");
+  addMessageElement.innerHTML =  "Adding book..."; //skriver bara 'adding book'
+  addStatusElement.innerHTML = "Pending: ";
+  addAlertElement.classList.remove("alert-danger", "alert-success");
+  addAlertElement.classList.add("alert-secondary");
+  
+  function addFailCallback(jsonResponse){
+
+    addStatusElement.innerHTML = jsonResponse.status + ": "; 
+    addMessageElement.innerHTML = jsonResponse.message;
+    addAlertElement.classList.remove("alert-secondary");
+    addAlertElement.classList.add("alert-danger");
+  }
+  function addSuccessCallback(jsonResponse){
+
+    addStatusElement.innerHTML = jsonResponse.status + ": "; 
+    addMessageElement.innerHTML = "Added book";
+    addAlertElement.classList.remove("alert-secondary");
+    addAlertElement.classList.add("alert-success");
+
+  }
 
   fetchFromApi(fetchRequest, counter, addSuccessCallback, addFailCallback); //kallar på en metod för att kunna kör den rekursivt, passerar in requesten och html referensen för att kunna använda samma metod för flera saker
 }
 
-function addFailCallback(jsonResponse){
-
-  var operationStatusElement = document.getElementById("addOperationStatus"); 
-  var operationMessageElement = document.getElementById("addOperationMessage")
-  var operationAlertElement = document.getElementById("addOperationAlert");
-
-  operationStatusElement.innerHTML = jsonResponse.status + ": "; 
-  operationMessageElement.innerHTML = jsonResponse.message;
-  operationAlertElement.classList.remove("alert-secondary");
-  operationAlertElement.classList.add("alert-danger");
-}
-function addSuccessCallback(jsonResponse){
-
-  var operationStatusElement = document.getElementById("addOperationStatus"); 
-  var operationMessageElement = document.getElementById("addOperationMessage")
-  var operationAlertElement = document.getElementById("addOperationAlert");
-
-  operationStatusElement.innerHTML = jsonResponse.status + ": "; 
-  operationMessageElement.innerHTML = "Added book";
-  operationAlertElement.classList.remove("alert-secondary");
-  operationAlertElement.classList.add("alert-success");
-
-}
 
 function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
   fetch(fetchRequest) //fetchar requesten
@@ -68,7 +61,7 @@ function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
         failedCallback(jsonResponse);
         
       } else {
-        fetchFromApi(fetchRequest, operationStatusElement, operationMessageElement, operationAlertElement, counter + 1);  //kör samma metod igen
+        fetchFromApi(fetchRequest, counter + 1, successCallback, failedCallback);  //kör samma metod igen
       }
     } else {
     successCallback(jsonResponse);
