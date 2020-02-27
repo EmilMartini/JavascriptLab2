@@ -6,19 +6,24 @@
     <link rel="stylesheet" href="bootstrap.css"> <!--dokumentation https://bootswatch.com/lux/-->
   </head>
   <body>
-    <input type="button" id="requestAPIKey" value="Request new API Key"></input>
-    <p>Your API key: <span id="result">No Key</span></p><hr>
-    
-    <form id="addBookForm" method="GET">
-      <input type="text" id="author" name="author" placeholder="Author"></input><br>
-      <input type="text" id="title" name="title" placeholder="Title"></input><br>
-      <input type="button" id="addBookBtn" value="Add Book"></input><hr>
-    </form>
-
-    <p id="test">Action status: </p><hr>
-
+    <div>
+      <input type="button" id="requestAPIKey" value="Request new API Key"></input>
+      <p>Your API key: <span id="result">No Key</span></p><hr>
+      
+      <form id="addBookForm" method="GET">
+        <input type="text" id="author" name="author" placeholder="Author"></input><br>
+        <input type="text" id="title" name="title" placeholder="Title"></input><br>
+        <input type="button" id="addBookBtn" value="Add Book"></input>
+      </form>
+      <p id="test">Action status: </p><hr>
+    </div>
     <input type="button" id="showBookBtn" value="Log Books"></input>
 
+    <div class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <h4 class="alert-heading">Warning!</h4>
+      <p class="mb-0" id="operationResult"></p>
+    </div>
     <footer>
       <script src="script.js" charset="utf-8"></script>
     </footer>
