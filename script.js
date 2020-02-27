@@ -37,6 +37,15 @@ function fetchFromApi(fetchRequest, htmlElement, counter){
   });
 }
 
+function showBook(){
+  var counter = 1;
+  var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
+  var fetchRequest = url + myKey + "&op=select";
+  fetch(fetchRequest)
+  .then((response) => response.json())
+  .then((jsonResponse) => console.log(jsonResponse));
+}
+
 document.getElementById("requestAPIKey").onclick = function(){
   fetchAPI();
 }
@@ -44,3 +53,7 @@ document.getElementById("requestAPIKey").onclick = function(){
 document.getElementById("addBookBtn").onclick = function(){
   addBook();
 };
+
+document.getElementById("showBookBtn").onclick = function(){
+  showBook();
+}
