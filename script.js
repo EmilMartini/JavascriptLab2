@@ -2,6 +2,8 @@
 
 
 var myKey;
+var titleValid = false;
+var authorValid = false;
 
 function fetchAPI(){
   var APIUrl = "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey";
@@ -83,15 +85,27 @@ function showBook(){
   .then((jsonResponse) => console.log(jsonResponse));
 }
 
-function modifyBook(){
-  var counter = 1;
-  var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
-  var fetchRequest = url + myKey + "&op=update";
-
+function validate(inputElement){
+  if(inputElement.value == ""){
+    if(inputElement.classList.contains("is-valid")){
+      inputElement.classList.remove("is-valid");
+    }
+    inputElement.classList.add("is-invalid");
+    return false;
+  } else {
+    if(inputElement.classList.contains("is-invalid")){
+      inputElement.classList.remove("is-invalid");
+    }
+    inputElement.classList.add("is-valid");
+    return true;
+  }
 }
 
-function validate(element){
-  if(element.value == ""){
+function validateButton(button, firstInput, secondInput){
+  if(firstInput && secondInput){
+    button.disabled = false;
+  } else {
+    button.disabled = true;
   }
 }
 
@@ -104,10 +118,20 @@ document.getElementById("addBookBtn").onclick = function(){
   addBook();
 };
 
-document.getElementById("showBookBtn").onclick = function(){
-  showBook();
+// document.getElementById("showBookBtn").onclick = function(){
+  // showBook();
+// }
+
+document.getElementById("authorInput").onkeyup = function(){
+  authorValid = validate(document.getElementById("authorInput"));
+  validateButton(document.getElementById("addBookBtn"), authorValid, titleValid);
 }
 
-document.getElementById("author").onkeyup = function(){
-  validate(document.getElementById("author"));
+document.getElementById("titleInput").onkeyup = function(){
+  titleValid = validate(document.getElementById("titleInput"));
+  validateButton(document.getElementById("addBookBtn"), titleValid, authorValid);
+}
+
+window.onload = function(){
+  fetchAPI();
 }
