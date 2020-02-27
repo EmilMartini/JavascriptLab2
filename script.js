@@ -27,12 +27,12 @@ function fetchFromApi(fetchRequest, htmlElement, counter){
     console.log(jsonResponse.status);  //loggar statusen i debug syfte
     if(jsonResponse.status == "error"){  //om statusen är 'error' 
       if(counter >= 10){ 
-        htmlElement.innerHTML = "Couldn't add book."; //self explanatory
+        htmlElement.innerHTML = jsonResponse.message; //self explanatory
       } else {
         fetchFromApi(fetchRequest, htmlElement, counter + 1);  //kör samma metod igen
       }
     } else {
-    htmlElement.innerHTML = jsonResponse.id; //skriv ut id på 'transaktionen'
+    htmlElement.innerHTML = jsonResponse.status; //skriv ut status på 'transaktionen'
     }
   });
 }
