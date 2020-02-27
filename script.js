@@ -51,6 +51,20 @@ function showBook(){
   var counter = 1;
   var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
   var fetchRequest = url + myKey + "&op=select";
+
+  /*TODO: 
+  
+  Deklarera elementet som skall visa innehållet
+
+  vid fail, skriv ut fail, var då någonstans?
+
+  Vid success, skapa så många tabellrader som krävs för att rymma böckerna
+  Fyll med innehåll
+  
+  */
+
+
+
   fetch(fetchRequest)
   .then((response) => response.json())
   .then((jsonResponse) => console.log(jsonResponse));
@@ -108,6 +122,12 @@ document.getElementById("requestAPIKey").onclick = function(){
 document.getElementById("addBookBtn").onclick = function(){
   addBook();
 };
+
+document.getElementById("viewBooksBtn").onclick = function(){
+  showBook();
+};
+
+
 
 // document.getElementById("showBookBtn").onclick = function(){
   // showBook();
