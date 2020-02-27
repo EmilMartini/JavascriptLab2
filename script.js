@@ -115,3 +115,7 @@ document.getElementById("titleInput").onkeyup = function(){
   titleValid = validate(document.getElementById("titleInput"));
   validateButton(document.getElementById("addBookBtn"), titleValid, authorValid);
 }
+
+window.onload = function(){
+  fetchAPI();
+}
