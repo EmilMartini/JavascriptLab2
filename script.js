@@ -44,10 +44,17 @@ function addBook(){
     addAlertElement.classList.add("alert-success");
 
   }
-
-  fetchFromApi(fetchRequest, counter, addSuccessCallback, addFailCallback); //kallar på en metod för att kunna kör den rekursivt, passerar in requesten och html referensen för att kunna använda samma metod för flera saker
+  fetchFromApi(fetchRequest, counter, addSuccessCallback, addFailCallback); 
 }
 
+function showBook(){
+  var counter = 1;
+  var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
+  var fetchRequest = url + myKey + "&op=select";
+  fetch(fetchRequest)
+  .then((response) => response.json())
+  .then((jsonResponse) => console.log(jsonResponse));
+}
 
 function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
   fetch(fetchRequest) //fetchar requesten
@@ -67,15 +74,6 @@ function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
     successCallback(jsonResponse);
     }
   });
-}
-
-function showBook(){
-  var counter = 1;
-  var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
-  var fetchRequest = url + myKey + "&op=select";
-  fetch(fetchRequest)
-  .then((response) => response.json())
-  .then((jsonResponse) => console.log(jsonResponse));
 }
 
 function validate(inputElement){
