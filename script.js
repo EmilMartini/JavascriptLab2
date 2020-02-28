@@ -4,6 +4,7 @@
 var myKey;
 var titleValid = false;
 var authorValid = false;
+var toggleContainers;
 
 function fetchAPI(){
   var APIUrl = "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey";
@@ -31,23 +32,23 @@ function addBook(){
   addStatusElement.innerHTML = "Pending: ";
   addAlertElement.classList.remove("alert-danger", "alert-success");
   addAlertElement.classList.add("alert-secondary");
-  
+
   function addFailCallback(jsonResponse){
 
-    addStatusElement.innerHTML = jsonResponse.status + ": "; 
+    addStatusElement.innerHTML = jsonResponse.status + ": ";
     addMessageElement.innerHTML = jsonResponse.message;
     addAlertElement.classList.remove("alert-secondary");
     addAlertElement.classList.add("alert-danger");
   }
   function addSuccessCallback(jsonResponse){
 
-    addStatusElement.innerHTML = jsonResponse.status + ": "; 
+    addStatusElement.innerHTML = jsonResponse.status + ": ";
     addMessageElement.innerHTML = "Added book";
     addAlertElement.classList.remove("alert-secondary");
     addAlertElement.classList.add("alert-success");
 
   }
-  fetchFromApi(fetchRequest, counter, addSuccessCallback, addFailCallback); 
+  fetchFromApi(fetchRequest, counter, addSuccessCallback, addFailCallback);
 }
 
 function showBook(){
@@ -67,7 +68,7 @@ function showBook(){
   showAlertElement.classList.add("alert-secondary");
 
   function showSuccessCallback(jsonResponse){
-    showStatusElement.innerHTML = jsonResponse.status + ": "; 
+    showStatusElement.innerHTML = jsonResponse.status + ": ";
 
     if(jsonResponse.data.length > 0){
       showMessageElement.innerHTML = "Got all " + jsonResponse.data.length + " books!";
@@ -77,7 +78,7 @@ function showBook(){
 
     showAlertElement.classList.remove("alert-secondary");
     showAlertElement.classList.add("alert-success");
-    
+
     var dynamicHtml = "";
 
     for (let i = 0; i < jsonResponse.data.length; i++) {
@@ -90,7 +91,7 @@ function showBook(){
 
   }
   function showFailedCallback(jsonResponse){
-    showStatusElement.innerHTML = jsonResponse.status + ": "; 
+    showStatusElement.innerHTML = jsonResponse.status + ": ";
     showMessageElement.innerHTML = jsonResponse.message;
     showAlertElement.classList.remove("alert-secondary");
     showAlertElement.classList.add("alert-danger");
@@ -119,7 +120,7 @@ function editBook(){
   editAlertElement.classList.add("alert-secondary");
 
   function editSuccessCallback(jsonResponse){
-    editStatusElement.innerHTML = jsonResponse.status + ": "; 
+    editStatusElement.innerHTML = jsonResponse.status + ": ";
     editMessageElement.innerHTML = "Edited book.";
     editAlertElement.classList.remove("alert-secondary");
     editAlertElement.classList.add("alert-success");
@@ -132,7 +133,7 @@ function editBook(){
   }
 
   function editFailedCallback(jsonResponse){
-    editStatusElement.innerHTML = jsonResponse.status + ": "; 
+    editStatusElement.innerHTML = jsonResponse.status + ": ";
     editMessageElement.innerHTML = jsonResponse.message;
     editAlertElement.classList.remove("alert-secondary");
     editAlertElement.classList.add("alert-danger");
@@ -144,15 +145,15 @@ function editBook(){
 
 function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
   fetch(fetchRequest)
-  .then((response) => 
+  .then((response) =>
     response.json())
   .then((jsonResponse) => {
     console.log(jsonResponse);
-    if(jsonResponse.status == "error"){ 
-      if(counter >= 10){ 
+    if(jsonResponse.status == "error"){
+      if(counter >= 10){
 
         failedCallback(jsonResponse);
-        
+
       } else {
         fetchFromApi(fetchRequest, counter + 1, successCallback, failedCallback);
       }
@@ -206,6 +207,14 @@ function addOnClickListenerToRows(rows){
   }
 }
 
+function toggleContainer(containerToToggle){
+  if(containerToToggle.style.display == "none"){
+    containerToToggle.style.display = "block";
+  } else {
+    containerToToggle.style.display = "none";
+  }
+}
+
 document.getElementById("requestAPIKey").onclick = function(){
   fetchAPI();
 }
@@ -222,6 +231,18 @@ document.getElementById("editBookBtn").onclick = function(){
   editBook();
 }
 
+document.getElementById("showBookNavBtn").onclick = function(){
+  toggleContainer(document.getElementById("showBookContainer"));
+}
+
+document.getElementById("addBookNavBtn").onclick = function(){
+  toggleContainer(document.getElementById("addBookContainer"));
+}
+
+document.getElementById("editBookNavBtn").onclick = function(){
+  toggleContainer(document.getElementById("editBookContainer"));
+}
+
 document.getElementById("authorInput").onkeyup = function(){
   authorValid = validate(document.getElementById("authorInput"));
   validateButton(document.getElementById("addBookBtn"), authorValid, titleValid);
@@ -234,4 +255,6 @@ document.getElementById("titleInput").onkeyup = function(){
 
 window.onload = function(){
   fetchAPI();
+  document.getElementById("showBookContainer").style.display = "none";
+  toggleContainers = document.getElementsByName("toggle-container");
 }
