@@ -123,6 +123,12 @@ function editBook(){
     editMessageElement.innerHTML = "Edited book.";
     editAlertElement.classList.remove("alert-secondary");
     editAlertElement.classList.add("alert-success");
+
+    editIdInput.value = "";
+    editAuthorInput.value = "";
+    editTitleInput.value = "";
+
+    showBook();
   }
 
   function editFailedCallback(jsonResponse){
