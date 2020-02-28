@@ -141,6 +141,45 @@ function editBook(){
   fetchFromApi(fetchRequest, counter, editSuccessCallback, editFailedCallback);
 }
 
+function deleteBook(){
+  var counter = 1;
+  var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
+  var operation = '&op=delete';
+  var editIdInput = document.getElementById("editIdInput");
+  var fetchRequest = url + myKey + operation + "&id=" + editIdInput.value;
+
+  var editStatusElement = document.getElementById("editOperationStatus");
+  var editMessageElement = document.getElementById("editOperationMessage")
+  var editAlertElement = document.getElementById("editOperationAlert");
+
+  editMessageElement.innerHTML =  "Deleting book...";
+  editStatusElement.innerHTML = "Pending: ";
+  editAlertElement.classList.remove("alert-danger", "alert-success");
+  editAlertElement.classList.add("alert-secondary");
+
+  function deleteSuccessCallback(jsonResponse){
+    editStatusElement.innerHTML = jsonResponse.status + ": "; 
+    editMessageElement.innerHTML = "deleted book.";
+    editAlertElement.classList.remove("alert-secondary");
+    editAlertElement.classList.add("alert-success");
+
+    editIdInput.value = "";
+    editAuthorInput.value = "";
+    editTitleInput.value = "";
+
+    showBook();
+  }
+
+  function deleteFailedCallback(jsonResponse){
+    editStatusElement.innerHTML = jsonResponse.status + ": "; 
+    editMessageElement.innerHTML = jsonResponse.message;
+    editAlertElement.classList.remove("alert-secondary");
+    editAlertElement.classList.add("alert-danger");
+  }
+  fetchFromApi(fetchRequest, counter, deleteSuccessCallback, deleteFailedCallback);  
+
+}
+
 
 function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
   fetch(fetchRequest)
@@ -221,6 +260,12 @@ document.getElementById("viewBooksBtn").onclick = function(){
 document.getElementById("editBookBtn").onclick = function(){
   editBook();
 }
+
+
+document.getElementById("deleteBookBtn").onclick = function(){
+  deleteBook();
+}
+
 
 document.getElementById("authorInput").onkeyup = function(){
   authorValid = validate(document.getElementById("authorInput"));
