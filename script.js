@@ -55,8 +55,8 @@ function showBook(){
   var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
   var fetchRequest = url + myKey + "&op=select";
 
-  var showStatusElement = document.getElementById("showOperationStatus"); //tar ett element ur htmlen
-  var showMessageElement = document.getElementById("showOperationMessage")
+  var showStatusElement = document.getElementById("showOperationStatus");
+  var showMessageElement = document.getElementById("showOperationMessage");
   var showAlertElement = document.getElementById("showOperationAlert");
 
   var tableElement = document.getElementById("bookViewTable");
@@ -99,19 +99,56 @@ function showBook(){
 
 }
 
+function editBook(){
+  var counter = 1;
+  var url = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
+
+  var editIdInput = document.getElementById("editIdInput");
+  var editTitleInput = document.getElementById("editTitleInput");
+  var editAuthorInput = document.getElementById("editAuthorInput");
+  var operation = '&op=update';
+  var fetchRequest = url + myKey + operation + "&id=" + editIdInput.value + "&title=" + editTitleInput.value + "&author=" + editAuthorInput.value;
+
+  var editStatusElement = document.getElementById("editOperationStatus");
+  var editMessageElement = document.getElementById("editOperationMessage")
+  var editAlertElement = document.getElementById("editOperationAlert");
+
+  editMessageElement.innerHTML =  "Editing book...";
+  editStatusElement.innerHTML = "Pending: ";
+  editAlertElement.classList.remove("alert-danger", "alert-success");
+  editAlertElement.classList.add("alert-secondary");
+
+  function editSuccessCallback(jsonResponse){
+    editStatusElement.innerHTML = jsonResponse.status + ": "; 
+    editMessageElement.innerHTML = "Edited book.";
+    editAlertElement.classList.remove("alert-secondary");
+    editAlertElement.classList.add("alert-success");
+  }
+
+  function editFailedCallback(jsonResponse){
+    editStatusElement.innerHTML = jsonResponse.status + ": "; 
+    editMessageElement.innerHTML = jsonResponse.message;
+    editAlertElement.classList.remove("alert-secondary");
+    editAlertElement.classList.add("alert-danger");
+  }
+
+  fetchFromApi(fetchRequest, counter, editSuccessCallback, editFailedCallback);
+}
+
+
 function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
-  fetch(fetchRequest) //fetchar requesten
+  fetch(fetchRequest)
   .then((response) => 
-    response.json()) //gör om till json
+    response.json())
   .then((jsonResponse) => {
-    console.log(jsonResponse);  //loggar statusen i debug syfte
-    if(jsonResponse.status == "error"){  //om statusen är 'error' 
+    console.log(jsonResponse);
+    if(jsonResponse.status == "error"){ 
       if(counter >= 10){ 
 
         failedCallback(jsonResponse);
         
       } else {
-        fetchFromApi(fetchRequest, counter + 1, successCallback, failedCallback);  //kör samma metod igen
+        fetchFromApi(fetchRequest, counter + 1, successCallback, failedCallback);
       }
     } else {
     successCallback(jsonResponse);
@@ -144,6 +181,7 @@ function validateButton(button, firstInput, secondInput){
 }
 
 function displaySelectedObject(object){
+  document.getElementById("editIdInput").value = object.Id;
   document.getElementById("editAuthorInput").value = object.Author;
   document.getElementById("editTitleInput").value = object.Title;
 }
@@ -173,6 +211,10 @@ document.getElementById("addBookBtn").onclick = function(){
 document.getElementById("viewBooksBtn").onclick = function(){
   showBook();
 };
+
+document.getElementById("editBookBtn").onclick = function(){
+  editBook();
+}
 
 document.getElementById("authorInput").onkeyup = function(){
   authorValid = validate(document.getElementById("authorInput"));

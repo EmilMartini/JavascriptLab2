@@ -49,6 +49,10 @@
       <form>
         <h4>Edit Book</h4>
         <fieldset>
+          <div class="form-group" id="editIdInputBox">
+            <label class="col-form-label" for="editIdInput">Id</label>
+            <input type="text" class="form-control" id="editIdInput" readonly>
+          </div>
           <div class="form-group" id="editAuthorInputBox">
             <label class="col-form-label" for="editAuthorInput">Author</label>
             <input type="text" class="form-control" id="editAuthorInput">
@@ -58,10 +62,10 @@
             <input type="text" class="form-control" id="editTitleInput">
           </div>
         </fieldset>
-        <button type="button" class="btn btn-primary" id="editBooksBtn">Edit Book</button>
-        <button type="button" class="btn btn-primary" id="deleteBooksBtn">Delete Book</button>
+        <button type="button" class="btn btn-primary" id="editBookBtn">Edit Book</button>
+        <button type="button" class="btn btn-primary" id="deleteBookBtn">Delete Book</button>
         </form>
-        <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="showOperationAlert">
+        <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="editOperationAlert">
           <strong id="editOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="editOperationMessage"></span>
         </div>
       </div>
