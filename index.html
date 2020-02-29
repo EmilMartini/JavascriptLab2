@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Store your books</title>
   <link rel="stylesheet" href="bootstrap.css"> <!--dokumentation https://bootswatch.com/lux/ -->
 </head>
 <body>
@@ -16,7 +16,7 @@
       <button id="editBookNavBtn" type="button" class="btn btn-warning">Edit Books</button>
     </div>
   </div>
-  <div id="addBookContainer" class="text-center" name="toggle-container">
+  <div id="addBookContainer" class="text-center">
     <form class="p-4 mt-3 text-center">
       <h4>Add Book</h4>
       <fieldset>
@@ -29,13 +29,13 @@
           <input type="text" class="form-control" placeholder="Title" id="titleInput">
         </div>
       </fieldset>
-      <button type="button" class="btn btn-primary" id="addBookBtn" disabled = "true">Add Book</button>
+      <button type="button" class="btn btn-primary" id="addBookBtn">Add Book</button>
       <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="addOperationAlert">
         <strong id="addOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="addOperationMessage"></span>
+      </div>
       </form>
     </div>
-  </div>
-  <div id="showBookContainer" class="p-4 mt-3 text-center" name="toggle-container">
+  <div id="showBookContainer" class="p-4 mt-3 text-center">
     <h4>Show Books</h4>
     <button type="button" class="btn btn-primary" id="viewBooksBtn">Show Saved Books</button>
     <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="showOperationAlert">
@@ -53,7 +53,7 @@
       </tbody>
     </table>
   </div>
-  <div id="editBookContainer" class="p-4 mt-3 text-center" name="toggle-container">
+  <div id="editBookContainer" class="p-4 mt-3 text-center">
     <form>
       <h4>Edit Book</h4>
       <fieldset>
