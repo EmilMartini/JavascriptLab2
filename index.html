@@ -7,7 +7,7 @@
 </head>
 <body>
   <div class="text-center p-5">
-    <h1>Store your books.</h1>
+    <h1>Store your books</h1>
   </div>
   <div class="text-center bg-primary">
     <div class="btn-group mr-2 text-center" role="group">
@@ -30,16 +30,16 @@
         </div>
       </fieldset>
       <button type="button" class="btn btn-primary" id="addBookBtn">Add Book</button>
-      <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="addOperationAlert">
-        <strong id="addOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="addOperationMessage"></span>
+      <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="insertOperationAlert">
+        <strong id="insertOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="insertOperationMessage"></span>
       </div>
       </form>
     </div>
   <div id="showBookContainer" class="p-4 mt-3 text-center">
     <h4>Show Books</h4>
     <button type="button" class="btn btn-primary" id="viewBooksBtn">Show Saved Books</button>
-    <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="showOperationAlert">
-      <strong id="showOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="showOperationMessage"></span>
+    <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="selectOperationAlert">
+      <strong id="selectOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="selectOperationMessage"></span>
     </div>
     <table class="table table-hover p-4" id="showBookTable">
       <thead>
@@ -73,8 +73,11 @@
       <button type="button" class="btn btn-primary" id="editBookBtn">Edit Book</button>
       <button type="button" class="btn btn-primary" id="deleteBookBtn">Delete Book</button>
     </form>
-    <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="editOperationAlert">
-      <strong id="editOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="editOperationMessage"></span>
+    <div class="alert alert-dismissible alert-secondary mt-3 p-0 float-left w-50" id="updateOperationAlert">
+      <strong id="updateOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="updateOperationMessage"></span>
+    </div>
+    <div class="alert alert-dismissible alert-secondary mt-3 p-0 float-right w-50" id="deleteOperationAlert">
+      <strong id="deleteOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="deleteOperationMessage"></span>
     </div>
   </div>
   <div class="m-5 text-center" >
