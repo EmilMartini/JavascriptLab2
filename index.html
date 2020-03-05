@@ -13,10 +13,9 @@
     <div class="btn-group mr-2 text-center" role="group">
       <button id="addBookNavBtn" type="button" class="btn btn-warning">Add Book</button>
       <button id="showBookNavBtn" type="button" class="btn btn-warning">Show Books</button>
-      <button id="editBookNavBtn" type="button" class="btn btn-warning">Edit Books</button>
     </div>
   </div>
-  <div id="addBookContainer" class="text-center">
+  <div id="addBookContainer" class="text-center border border-primary rounded w-50 mt-5 mx-auto">
     <form class="p-4 mt-3 text-center">
       <h4>Add Book</h4>
       <fieldset>
@@ -35,7 +34,7 @@
       </div>
       </form>
     </div>
-  <div id="showBookContainer" class="p-4 mt-3 text-center">
+  <div id="showBookContainer" class="p-4 mt-3 text-center border border-primary rounded w-75 mt-5 mx-auto">
     <h4>Show Books</h4>
     <button type="button" class="btn btn-primary" id="viewBooksBtn">Show Saved Books</button>
     <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="selectOperationAlert">
@@ -53,7 +52,7 @@
       </tbody>
     </table>
   </div>
-  <div id="editBookContainer" class="p-4 mt-3 text-center">
+  <div id="editBookContainer" class="p-4 mt-3 text-center border border-primary rounded w-25 mt-5 float-right">
     <form>
       <h4>Edit Book</h4>
       <fieldset>
@@ -70,8 +69,9 @@
           <input type="text" class="form-control" id="editTitleInput">
         </div>
       </fieldset>
-      <button type="button" class="btn btn-primary" id="editBookBtn">Edit Book</button>
-      <button type="button" class="btn btn-primary" id="deleteBookBtn">Delete Book</button>
+      <button type="button" class="btn btn-primary p-2" id="editBookBtn">Edit Book</button>
+      <button type="button" class="btn btn-primary p-2" id="deleteBookBtn">Delete Book</button>
+      <button type="button" class="close" id="closeEditBtn"><span aria-hidden="true">&times;</span></button>
     </form>
     <div class="alert alert-dismissible alert-secondary mt-3 p-0 float-left w-50" id="updateOperationAlert">
       <strong id="updateOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="updateOperationMessage"></span>
@@ -80,7 +80,7 @@
       <strong id="deleteOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="deleteOperationMessage"></span>
     </div>
   </div>
-  <div class="m-5 text-center" >
+  <div class="m-5 text-center">
     <hr>
     <h5>Your API key</h5><p id="keyResult">No Key</p>
     <button type="button" class="btn-sm btn-primary" id="requestAPIKey">Request new API Key</button>

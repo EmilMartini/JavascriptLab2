@@ -1,6 +1,10 @@
-let myKey;
-let titleValid = false;
-let authorValid = false;
+var myKey;
+var titleValid = false;
+var authorValid = false;
+
+var showBookContainer;
+var editBookContainer;
+var addBookContainer;
 const baseUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?key=';
 
 function CRUDOperation(inputs, operation, pendingMessage, successMessage){
@@ -12,7 +16,7 @@ function CRUDOperation(inputs, operation, pendingMessage, successMessage){
       fetchRequest += "&title=" + inputs[0].value + "&author=" + inputs[1].value;
       break;
     case "update":
-      fetchRequest += "&title=" + inputs[0].value + "&author=" + inputs[1].value + "&id=" + inputs[2].value; 
+      fetchRequest += "&title=" + inputs[0].value + "&author=" + inputs[1].value + "&id=" + inputs[2].value;
       break;
     case "delete":
       fetchRequest += "&id=" + inputs[0].value;
@@ -44,10 +48,13 @@ function CRUDOperation(inputs, operation, pendingMessage, successMessage){
       table.innerHTML = dynamicHtml;
       addOnClickListenerToRows(document.getElementsByTagName("tr"));
     }
-  statusElement.innerHTML = jsonResponse.status + ": ";
-  messageElement.innerHTML = successMessage;
-  alertElement.classList.remove("alert-secondary");
-  alertElement.classList.add("alert-success");
+    statusElement.innerHTML = jsonResponse.status + ": ";
+    messageElement.innerHTML = successMessage;
+    alertElement.classList.remove("alert-secondary");
+    alertElement.classList.add("alert-success");
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].value = "";
+    }
   }
   fetchFromApi(fetchRequest, counter, successCallback, failedCallback);
 }
@@ -105,6 +112,11 @@ function validateButton(button, firstInput, secondInput){
 }
 
 function displaySelectedObject(object){
+  if(editBookContainer.style.display = "none"){
+    showBookContainer.classList.remove("mx-auto");
+    showBookContainer.classList.add("float-left");
+    editBookContainer.style.display = "block"
+  }
   document.getElementById("editIdInput").value = object.Id;
   document.getElementById("editAuthorInput").value = object.Author;
   document.getElementById("editTitleInput").value = object.Title;
@@ -137,7 +149,7 @@ document.getElementById("requestAPIKey").onclick = function(){
 
 document.getElementById("addBookBtn").onclick = function(){
   CRUDOperation(
-    [document.getElementById("titleInput"), 
+    [document.getElementById("titleInput"),
     document.getElementById("authorInput")],
     "insert", "Adding book", "Added book.");
 };
@@ -159,15 +171,23 @@ document.getElementById("deleteBookBtn").onclick = function(){
 }
 
 document.getElementById("showBookNavBtn").onclick = function(){
-  toggleContainer(document.getElementById("showBookContainer"));
+  if(showBookContainer.style.display = "none"){
+    showBookContainer.style.display = "block";
+    addBookContainer.style.display = "none";
+  }
 }
 
 document.getElementById("addBookNavBtn").onclick = function(){
-  toggleContainer(document.getElementById("addBookContainer"));
+  if(addBookContainer.style.display = "none"){
+    addBookContainer.style.display = "block";
+    showBookContainer.style.display = "none";
+  }
 }
 
-document.getElementById("editBookNavBtn").onclick = function(){
-  toggleContainer(document.getElementById("editBookContainer"));
+document.getElementById("closeEditBtn").onclick = function(){
+  showBookContainer.classList.add("mx-auto");
+  showBookContainer.classList.remove("float-left");
+  editBookContainer.style.display = "none"
 }
 
 document.getElementById("authorInput").onkeyup = function(){
@@ -182,5 +202,14 @@ document.getElementById("titleInput").onkeyup = function(){
 
 window.onload = function(){
   fetchAPIKey();
-  document.getElementById("showBookContainer").style.display = "none";
+  authorValid = validate(document.getElementById("authorInput"));
+  titleValid = validate(document.getElementById("titleInput"));
+  validateButton(document.getElementById("addBookBtn"), titleValid, authorValid);
+
+  addBookContainer = document.getElementById("addBookContainer");
+  editBookContainer = document.getElementById("editBookContainer");
+  showBookContainer = document.getElementById("showBookContainer");
+  addBookContainer.style.display = "none";
+  showBookContainer.style.display = "block";
+  editBookContainer.style.display = "none";
 }
