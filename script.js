@@ -42,11 +42,12 @@ function CRUDOperation(inputs, operation, pendingMessage, successMessage){
     if(operation == "select"){
         let dynamicHtml = "";
         for (let i = 0; i < jsonResponse.data.length; i++) {
-        dynamicHtml += ('<tr class="table-info"><td id="dataId">'+ jsonResponse.data[i].id +'</td><td id="dataAuthor">'+ jsonResponse.data[i].author +'</td><td id="dataTitle">' + jsonResponse.data[i].title + '</td></td>');
+        dynamicHtml += ('<tr class="table-info"><td id="dataId">'+ jsonResponse.data[i].id +'</td><td id="dataAuthor">'+ jsonResponse.data[i].author +'</td><td id="dataTitle">' + jsonResponse.data[i].title
+        + '</td><td><button type="button" class="btn btn-primary edit">Edit Book</button></td></td>');
       }
       let table = document.getElementById("bookViewTable");
       table.innerHTML = dynamicHtml;
-      addOnClickListenerToRows(document.getElementsByTagName("tr"));
+      addOnClickListenerToRows(document.getElementsByTagName("tr"),document.querySelectorAll("button.edit"));
     }
     statusElement.innerHTML = jsonResponse.status + ": ";
     messageElement.innerHTML = successMessage;
@@ -109,10 +110,10 @@ function validateButton(button, firstInput, secondInput){
 }
 
 function displaySelectedObject(object){
-  showEditWindow("fadeInRight", "fadeOutRight");
   document.getElementById("editIdInput").value = object.Id;
   document.getElementById("editAuthorInput").value = object.Author;
   document.getElementById("editTitleInput").value = object.Title;
+  showEditWindow("fadeInRight", "fadeOutRight");
 }
 
 function showEditWindow(entryAnim, outroAnim){
@@ -136,13 +137,13 @@ function hideEditWindow(entryAnim, outroAnim){
   }
 
 
-function addOnClickListenerToRows(rows){
-  for (let i = 0; i < rows.length; i++){
-    rows[i].onclick = function() {
+function addOnClickListenerToRows(rows, buttons){
+  for (let i = 0; i < buttons.length; i++){
+    buttons[i].onclick = function() {
       let object = {
-        Id : document.getElementById("showBookTable").rows[this.rowIndex].cells[0].innerHTML,
-        Author : document.getElementById("showBookTable").rows[this.rowIndex].cells[1].innerHTML,
-        Title : document.getElementById("showBookTable").rows[this.rowIndex].cells[2].innerHTML
+        Id : document.getElementById("showBookTable").rows[i + 1].cells[0].innerHTML,
+        Author : document.getElementById("showBookTable").rows[i + 1].cells[1].innerHTML,
+        Title : document.getElementById("showBookTable").rows[i + 1].cells[2].innerHTML
       }
       displaySelectedObject(object);
     };

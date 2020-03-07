@@ -4,18 +4,22 @@
   <meta charset="utf-8">
   <title>Store your books</title>
   <link rel="stylesheet" href="bootstrap.css"> <!--dokumentation https://bootswatch.com/lux/ -->
-  <link rel="stylesheet" href="mdb.css">
+  <link rel="stylesheet" href="animate.css">
 </head>
 <body>
   <div class="text-center p-5">
     <h1>Store your books</h1>
   </div>
+
+  <!--Background behind buttons /-->
   <div class="text-center bg-primary">
     <div class="btn-group mr-2 text-center" role="group">
       <button id="addBookNavBtn" type="button" class="btn btn-warning m-2">Add Book</button>
       <button id="showBookNavBtn" type="button" class="btn btn-warning m-2">Show Books</button>
     </div>
   </div>
+
+  <!--AddBook Container /-->
   <div id="addBookContainer" class="text-center border border-primary rounded w-50 mt-5 mx-auto">
     <form class="p-4 mt-3 text-center">
       <h4>Add Book</h4>
@@ -35,7 +39,9 @@
       </div>
       </form>
     </div>
-  <div id="showBookContainer" class="p-4 mt-3 text-center w-75 mt-5 mx-auto animated">
+
+    <!--ShowBook Container /-->
+  <div id="showBookContainer" class="p-4 mt-3 text-center w-75 mt-5 animated mx-auto">
     <h4>Show Books</h4>
     <button type="button" class="btn btn-primary" id="viewBooksBtn">Show Saved Books</button>
     <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="selectOperationAlert">
@@ -47,15 +53,18 @@
           <th scope="col">ID</th>
           <th scope="col">Author</th>
           <th scope="col">Title</th>
+          <th scope="button">Edit Book</th>
         </tr>
       </thead>
       <tbody id="bookViewTable">
       </tbody>
     </table>
   </div>
-  <div id="editBookContainer" class="p-4 mt-3 text-center w-25 mt-5 float-right animated">
+  
+  <div id="editBookContainer" class="p-4 mt-3 text-center w-25 mt-5 animated popover float-right">
+    <button type="button" class="close float-right" id="closeEditBtn"><span aria-hidden="true">&times;</span></button>
+    <h4>Edit Book</h4>
     <form>
-      <h4>Edit Book</h4>
       <fieldset>
         <div class="form-group" id="editIdInputBox">
           <label class="col-form-label" for="editIdInput">Id</label>
@@ -72,7 +81,6 @@
       </fieldset>
       <button type="button" class="btn btn-primary p-2" id="editBookBtn">Edit Book</button>
       <button type="button" class="btn btn-primary p-2" id="deleteBookBtn">Delete Book</button>
-      <button type="button" class="close" id="closeEditBtn"><span aria-hidden="true">&times;</span></button>
     </form>
     <div class="alert alert-dismissible alert-secondary mt-3 p-0 float-left w-50" id="updateOperationAlert">
       <strong id="updateOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="updateOperationMessage"></span>
@@ -81,6 +89,7 @@
       <strong id="deleteOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="deleteOperationMessage"></span>
     </div>
   </div>
+
   <div class="m-5 text-center">
     <hr>
     <h5>Your API key</h5><p id="keyResult">No Key</p>
