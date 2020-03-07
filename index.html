@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Store your books</title>
   <link rel="stylesheet" href="bootstrap.css"> <!--dokumentation https://bootswatch.com/lux/ -->
+  <link rel="stylesheet" href="mdb.css">
 </head>
 <body>
   <div class="text-center p-5">
@@ -11,8 +12,8 @@
   </div>
   <div class="text-center bg-primary">
     <div class="btn-group mr-2 text-center" role="group">
-      <button id="addBookNavBtn" type="button" class="btn btn-warning">Add Book</button>
-      <button id="showBookNavBtn" type="button" class="btn btn-warning">Show Books</button>
+      <button id="addBookNavBtn" type="button" class="btn btn-warning m-2">Add Book</button>
+      <button id="showBookNavBtn" type="button" class="btn btn-warning m-2">Show Books</button>
     </div>
   </div>
   <div id="addBookContainer" class="text-center border border-primary rounded w-50 mt-5 mx-auto">
@@ -34,7 +35,7 @@
       </div>
       </form>
     </div>
-  <div id="showBookContainer" class="p-4 mt-3 text-center w-75 mt-5 mx-auto">
+  <div id="showBookContainer" class="p-4 mt-3 text-center w-75 mt-5 mx-auto animated">
     <h4>Show Books</h4>
     <button type="button" class="btn btn-primary" id="viewBooksBtn">Show Saved Books</button>
     <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="selectOperationAlert">
@@ -52,7 +53,7 @@
       </tbody>
     </table>
   </div>
-  <div id="editBookContainer" class="p-4 mt-3 text-center w-25 mt-5 float-right">
+  <div id="editBookContainer" class="p-4 mt-3 text-center w-25 mt-5 float-right animated">
     <form>
       <h4>Edit Book</h4>
       <fieldset>

@@ -52,9 +52,6 @@ function CRUDOperation(inputs, operation, pendingMessage, successMessage){
     messageElement.innerHTML = successMessage;
     alertElement.classList.remove("alert-secondary");
     alertElement.classList.add("alert-success");
-    for (var i = 0; i < inputs.length; i++) {
-      inputs[i].value = "";
-    }
   }
   fetchFromApi(fetchRequest, counter, successCallback, failedCallback);
 }
@@ -112,15 +109,32 @@ function validateButton(button, firstInput, secondInput){
 }
 
 function displaySelectedObject(object){
-  if(editBookContainer.style.display = "none"){
-    showBookContainer.classList.remove("mx-auto");
-    showBookContainer.classList.add("float-left");
-    editBookContainer.style.display = "block"
-  }
+  showEditWindow("fadeInRight", "fadeOutRight");
   document.getElementById("editIdInput").value = object.Id;
   document.getElementById("editAuthorInput").value = object.Author;
   document.getElementById("editTitleInput").value = object.Title;
 }
+
+function showEditWindow(entryAnim, outroAnim){
+  if(editBookContainer.style.display == "none"){
+    if(editBookContainer.classList.contains(outroAnim)){
+      editBookContainer.classList.remove(outroAnim);
+    }
+    editBookContainer.classList.add(entryAnim);
+    editBookContainer.style.display = "block";
+  }
+}
+
+function hideEditWindow(entryAnim, outroAnim){
+  if(editBookContainer.style.display == "block"){
+      if(editBookContainer.classList.contains(entryAnim)){
+        editBookContainer.classList.remove(entryAnim);
+      }
+      editBookContainer.classList.add(outroAnim);
+      editBookContainer.style.display = "none";
+    }
+  }
+
 
 function addOnClickListenerToRows(rows){
   for (let i = 0; i < rows.length; i++){
@@ -185,9 +199,7 @@ document.getElementById("addBookNavBtn").onclick = function(){
 }
 
 document.getElementById("closeEditBtn").onclick = function(){
-  showBookContainer.classList.add("mx-auto");
-  showBookContainer.classList.remove("float-left");
-  editBookContainer.style.display = "none"
+  hideEditWindow("fadeInRight", "fadeOutRight");
 }
 
 document.getElementById("authorInput").onkeyup = function(){
