@@ -113,7 +113,7 @@ function displaySelectedObject(object){
   document.getElementById("editIdInput").value = object.Id;
   document.getElementById("editAuthorInput").value = object.Author;
   document.getElementById("editTitleInput").value = object.Title;
-  showEditWindow("fadeInRight", "fadeOutRight");
+  showEditWindow("fadeIn", "fadeOutRight");
 }
 
 function showEditWindow(entryAnim, outroAnim){
