@@ -23,7 +23,6 @@
   <div id="addBookContainer" class="text-center border border-primary rounded w-50 mt-5 mx-auto">
     <form class="p-4 mt-3 text-center">
       <h4>Add Book</h4>
-      <fieldset>
         <div class="form-group" id="authorInputBox">
           <label class="col-form-label" for="authorInput">Author</label>
           <input type="text" class="form-control" placeholder="Author" id="authorInput">
@@ -32,7 +31,6 @@
           <label class="col-form-label" for="titleInput">Title</label>
           <input type="text" class="form-control" placeholder="Title" id="titleInput">
         </div>
-      </fieldset>
       <button type="button" class="btn btn-primary" id="addBookBtn">Add Book</button>
       <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="insertOperationAlert">
         <strong id="insertOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="insertOperationMessage"></span>
@@ -41,10 +39,10 @@
     </div>
 
     <!--ShowBook Container /-->
-  <div id="showBookContainer" class="p-4 mt-3 text-center w-75 mt-5 animated mx-auto">
+  <div id="showBookContainer" class="p-4 text-center w-75 mt-5 animated mx-auto">
     <h4>Show Books</h4>
     <button type="button" class="btn btn-primary" id="viewBooksBtn">Show Saved Books</button>
-    <div class="alert alert-dismissible alert-secondary mt-3 p-0" id="selectOperationAlert">
+    <div class="alert alert-dismissible alert-secondary mt-3" id="selectOperationAlert">
       <strong id="selectOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="selectOperationMessage"></span>
     </div>
     <table class="table table-hover p-4" id="showBookTable">
@@ -53,7 +51,7 @@
           <th scope="col">ID</th>
           <th scope="col">Author</th>
           <th scope="col">Title</th>
-          <th scope="button">Edit Book</th>
+          <th scope="col">Edit Book</th>
         </tr>
       </thead>
       <tbody id="bookViewTable">
@@ -65,27 +63,25 @@
     <button type="button" class="close float-right" id="closeEditBtn"><span aria-hidden="true">&times;</span></button>
     <h4>Edit Book</h4>
     <form>
-      <fieldset>
-        <div class="form-group" id="editIdInputBox">
-          <label class="col-form-label" for="editIdInput">Id</label>
-          <input type="text" class="form-control" id="editIdInput" readonly>
-        </div>
-        <div class="form-group" id="editAuthorInputBox">
-          <label class="col-form-label" for="editAuthorInput">Author</label>
-          <input type="text" class="form-control" id="editAuthorInput">
-        </div>
-        <div class="form-group" id="editTitleInputBox">
-          <label class="col-form-label" for="editTitleInput">Title</label>
-          <input type="text" class="form-control" id="editTitleInput">
-        </div>
-      </fieldset>
+      <div class="form-group" id="editIdInputBox">
+        <label class="col-form-label" for="editIdInput">Id</label>
+        <input type="text" class="form-control" id="editIdInput" readonly>
+      </div>
+      <div class="form-group" id="editAuthorInputBox">
+        <label class="col-form-label" for="editAuthorInput">Author</label>
+        <input type="text" class="form-control" id="editAuthorInput">
+      </div>
+      <div class="form-group" id="editTitleInputBox">
+        <label class="col-form-label" for="editTitleInput">Title</label>
+        <input type="text" class="form-control" id="editTitleInput">
+      </div>
       <button type="button" class="btn btn-primary p-2" id="editBookBtn">Edit Book</button>
       <button type="button" class="btn btn-primary p-2" id="deleteBookBtn">Delete Book</button>
     </form>
-    <div class="alert alert-dismissible alert-secondary mt-3 p-0 float-left w-50" id="updateOperationAlert">
+    <div class="alert alert-dismissible alert-secondary mt-3 float-left w-50" id="updateOperationAlert">
       <strong id="updateOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="updateOperationMessage"></span>
     </div>
-    <div class="alert alert-dismissible alert-secondary mt-3 p-0 float-right w-50" id="deleteOperationAlert">
+    <div class="alert alert-dismissible alert-secondary mt-3 float-right w-50" id="deleteOperationAlert">
       <strong id="deleteOperationStatus" class="font-weight-bold text-uppercase"></strong> <span id="deleteOperationMessage"></span>
     </div>
   </div>

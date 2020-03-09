@@ -42,7 +42,7 @@ function CRUDOperation(inputs, operation, pendingMessage, successMessage){
     if(operation == "select"){
         let dynamicHtml = "";
         for (let i = 0; i < jsonResponse.data.length; i++) {
-        dynamicHtml += ('<tr class="table-info"><td id="dataId">'+ jsonResponse.data[i].id +'</td><td id="dataAuthor">'+ jsonResponse.data[i].author +'</td><td id="dataTitle">' + jsonResponse.data[i].title
+        dynamicHtml += ('<tr class="table-info"><td id="dataId" class="align-middle">'+ jsonResponse.data[i].id +'</td><td id="dataAuthor" class="align-middle">'+ jsonResponse.data[i].author +'</td><td id="dataTitle" class="align-middle">' + jsonResponse.data[i].title
         + '</td><td><button type="button" class="btn btn-primary edit">Edit Book</button></td></td>');
       }
       let table = document.getElementById("bookViewTable");
@@ -62,7 +62,6 @@ function fetchFromApi(fetchRequest, counter, successCallback, failedCallback){
   .then((response) =>
     response.json())
   .then((jsonResponse) => {
-    console.log(jsonResponse);
     if(jsonResponse.status == "error"){
       if(counter >= 10){
         failedCallback(jsonResponse);
