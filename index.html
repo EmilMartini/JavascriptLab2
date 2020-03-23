@@ -14,8 +14,8 @@
   <!--Background behind buttons /-->
   <div class="text-center bg-primary">
     <div class="btn-group mr-2 text-center" role="group">
-      <button id="addBookNavBtn" type="button" class="btn btn-warning m-2">Add Book</button>
-      <button id="showBookNavBtn" type="button" class="btn btn-warning m-2">Show Books</button>
+      <button id="addBookNavBtn" type="button" class="btn btn-warning m-2" onclick="toggleAddBookContainer()">Add Book</button>
+      <button id="showBookNavBtn" type="button" class="btn btn-warning m-2" onclick="toggleShowBookContainer()">Show Books</button>
     </div>
   </div>
 
@@ -89,7 +89,7 @@
   <div class="m-5 text-center">
     <hr>
     <h5>Your API key</h5><p id="keyResult">No Key</p>
-    <button type="button" class="btn-sm btn-primary" id="requestAPIKey">Request new API Key</button>
+    <button type="button" class="btn-sm btn-primary" id="requestAPIKey" onclick="fetchAPIKey()">Request new API Key</button>
   </div><hr>
   <footer>
     <p class="text-center">Made by: <a href="https://github.com/gissavem" target="_blank">John Andersson</a> & <a href="https://github.com/emilmartini" target="_blank">Emil Martini</a></p>

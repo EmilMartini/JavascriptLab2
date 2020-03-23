@@ -149,8 +149,18 @@ function addOnClickListenerToRows(rows, buttons){
   }
 }
 
-document.getElementById("requestAPIKey").onclick = function(){
-  fetchAPIKey();
+function toggleShowBookContainer(){
+  if(showBookContainer.style.display = "none"){
+    showBookContainer.style.display = "block";
+    addBookContainer.style.display = "none";
+  }
+}
+
+function toggleAddBookContainer(){
+  if(addBookContainer.style.display = "none"){
+    addBookContainer.style.display = "block";
+    showBookContainer.style.display = "none";
+  }
 }
 
 document.getElementById("addBookBtn").onclick = function(){
@@ -174,20 +184,6 @@ document.getElementById("viewBooksBtn").onclick = function(){
 
 document.getElementById("deleteBookBtn").onclick = function(){
   CRUDOperation([document.getElementById("editIdInput")], "delete", "Deleting book.", "Deleted book");
-}
-
-document.getElementById("showBookNavBtn").onclick = function(){
-  if(showBookContainer.style.display = "none"){
-    showBookContainer.style.display = "block";
-    addBookContainer.style.display = "none";
-  }
-}
-
-document.getElementById("addBookNavBtn").onclick = function(){
-  if(addBookContainer.style.display = "none"){
-    addBookContainer.style.display = "block";
-    showBookContainer.style.display = "none";
-  }
 }
 
 document.getElementById("closeEditBtn").onclick = function(){
