@@ -149,14 +149,6 @@ function addOnClickListenerToRows(rows, buttons){
   }
 }
 
-function toggleContainer(containerToToggle){
-  if(containerToToggle.style.display == "none"){
-    containerToToggle.style.display = "block";
-  } else {
-    containerToToggle.style.display = "none";
-  }
-}
-
 document.getElementById("requestAPIKey").onclick = function(){
   fetchAPIKey();
 }
